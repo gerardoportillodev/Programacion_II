@@ -1,8 +1,7 @@
 Programación II
 ===============
 
-Este es el repositorio de la clase Programación II.
-Los ejercicios están organizados por semanas dentro de carpetas Semana-XX, cada una con su código fuente en Java.
+Este es el repositorio de Programación II.
 
 Comandos básicos de Git
 -----------------------
