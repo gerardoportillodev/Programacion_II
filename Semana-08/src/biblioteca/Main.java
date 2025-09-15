@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         Biblioteca bib = new Biblioteca();
-        inicializarDatos(bib); // 🚀 cargamos ejemplos salvadoreños
+        inicializarDatos(bib);
 
         int opc;
         do {
@@ -28,7 +28,7 @@ public class Main {
         } while (opc != 0);
     }
 
-    // --- Datos ficticios ---
+    // Datos ficticios
     private static void inicializarDatos(Biblioteca bib) {
         // Libros salvadoreños
         bib.registrarLibro(new Libro("cuzcatlan donde bate la mar del sur", "alfonso quinonez molina", 1930, "novela"));
@@ -61,10 +61,10 @@ public class Main {
         u3.tomarPrestado(bib.listarDisponibles().get(4), 15); // 15 días
     }
 
-    // --- Menú ---
+    // Menú
     private static void mostrarMenu() {
         System.out.println("""
-        ==== Biblioteca ====
+        ***--- Biblioteca ---***
         1) Registrar libro
         2) Registrar usuario
         3) Prestar libro
@@ -76,7 +76,7 @@ public class Main {
         """);
     }
 
-    // --- Métodos de acciones ---
+    // Métodos de acciones
     private static void registrarLibro(Biblioteca bib) {
         System.out.print("Título: "); String t = sc.nextLine();
         System.out.print("Autor: "); String a = sc.nextLine();
@@ -145,24 +145,24 @@ public class Main {
     }
 
     private static void listarTodos(Biblioteca bib) {
-        System.out.println("=== Catálogo completo ===");
+        System.out.println("Catálogo completo");
         mostrarLista(bib.listarTodos());
     }
 
     private static void listarDisponibles(Biblioteca bib) {
-        System.out.println("=== Libros disponibles ===");
+        System.out.println("Libros disponibles");
         mostrarLista(bib.listarDisponibles());
     }
 
     private static void listarUsuarios(Biblioteca bib) {
-        System.out.println("=== Usuarios registrados ===");
+        System.out.println("Usuarios registrados");
         for (Usuario u : bib.getUsuarios()) {
             System.out.println(u);
             System.out.println();
         }
     }
 
-    // --- Utilidades ---
+    // Utilidades
     private static Usuario elegirUsuario(Biblioteca bib) {
         List<Usuario> usuarios = new ArrayList<>(bib.getUsuarios());
         if (usuarios.isEmpty()) {
