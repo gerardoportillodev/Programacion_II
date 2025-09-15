@@ -1,10 +1,10 @@
 package biblioteca;
 
 public class Libro {
-    private String titulo;
-    private String autor;
-    private int anio;
-    private String genero;
+    private final String titulo;
+    private final String autor;
+    private final int anio;
+    private final String genero;
     private boolean prestado;
 
     public Libro(String titulo, String autor, int anio, String genero) {
@@ -21,17 +21,13 @@ public class Libro {
     public String getGenero() { return genero; }
     public boolean isPrestado() { return prestado; }
 
-    public boolean prestar() {
-        if (prestado) return false;
-        prestado = true; return true;
-    }
-    public boolean devolver() {
-        if (!prestado) return false;
-        prestado = false; return true;
-    }
+    public void marcarPrestado() { prestado = true; }
+    public void marcarDisponible() { prestado = false; }
 
-    @Override public String toString() {
-        return titulo + " - " + autor + " (" + anio + ") [" + genero + "] "
-                + (prestado ? "Prestado" : "Disponible");
+    @Override
+    public String toString() {
+        return String.format("%s - %s (%d) [%s] -> %s",
+                titulo, autor, anio, genero,
+                prestado ? "prestado" : "disponible");
     }
 }
