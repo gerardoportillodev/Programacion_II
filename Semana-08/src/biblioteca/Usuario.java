@@ -4,42 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
-    private final String id;
-    private final String nombre;
-    private final List<Prestamo> prestamos = new ArrayList<>();
+    private String nombre;
+    private String id;
+    private List<Libro> librosPrestados = new ArrayList<>();
 
-    public Usuario(String id, String nombre) {
-        this.id = id.toLowerCase();
-        this.nombre = nombre.toLowerCase();
+    public Usuario(String nombre, String id) {
+        this.nombre = nombre; this.id = id;
     }
 
-    public String getId() { return id; }
     public String getNombre() { return nombre; }
-    public List<Prestamo> getPrestamos() { return prestamos; }
+    public String getId() { return id; }
+    public List<Libro> getLibrosPrestados() { return librosPrestados; }
 
-    public boolean tomarPrestado(Libro l, int dias) {
+    public boolean tomarPrestado(Libro l) {
         if (l.isPrestado()) return false;
-        prestamos.add(new Prestamo(l, dias));
-        return true;
-    }
-
-    public boolean devolver(Libro l) {
-        for (Prestamo p : prestamos) {
-            if (p.getLibro().equals(l)) {
-                p.devolver();
-                prestamos.remove(p);
-                return true;
-            }
-        }
+        if (l.prestar()) { librosPrestados.add(l); return true; }
         return false;
     }
 
-    @Override
-    public String toString() {
+    public boolean devolver(Libro l) {
+        if (!librosPrestados.contains(l)) return false;
+        if (l.devolver()) { librosPrestados.remove(l); return true; }
+        return false;
+    }
+
+    @Override public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(nombre).append(" (").append(id).append(")\nPrestamos:");
-        if (prestamos.isEmpty()) sb.append(" ninguno");
-        else for (Prestamo p : prestamos) sb.append("\n - ").append(p);
+        sb.append("Usuario: ").append(nombre).append(" (").append(id).append(")\n")
+                .append("Prestados:\n");
+        if (librosPrestados.isEmpty()) sb.append("  Ninguno\n");
+        else for (Libro l: librosPrestados) sb.append("  - ").append(l.getTitulo()).append("\n");
         return sb.toString();
     }
 }
